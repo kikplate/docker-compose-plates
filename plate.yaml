@@ -1,4 +1,4 @@
-name: minio
+name: minio-docker-compose
 owner: kikplate-public
 description: MinIO S3-compatible object storage with web console, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
