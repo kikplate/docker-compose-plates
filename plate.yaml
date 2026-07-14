@@ -24,11 +24,20 @@ schema:
   minioConsolePort:
     type: int
     default: 9001
+  minioRegion:
+    type: string
+    default: us-east-1
+  minioBrowser:
+    type: string
+    default: "on"
+  minioSiteReplicationEnabled:
+    type: string
+    default: "false"
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl
