@@ -2,7 +2,7 @@ name: keycloak
 owner: kikplate-public
 description: Keycloak 24 identity and access management. Composes the postgres plate for its database. The postgres module can be disabled when using an external PostgreSQL instance.
 version: 1.0.0
-category: auth
+category: security
 
 tags:
   - keycloak
