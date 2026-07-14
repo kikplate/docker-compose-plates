@@ -28,6 +28,6 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/docker-registry/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/docker-registry/templates/README.md.tmpl
+    template: templates/README.md.tmpl
