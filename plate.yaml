@@ -1,0 +1,43 @@
+name: wordpress
+owner: kikplate-public
+description: WordPress CMS. Composes the mysql plate for its database. The mysql module can be disabled when using an external MySQL instance.
+version: 1.0.0
+category: cms
+
+tags:
+  - wordpress
+  - cms
+  - mysql
+  - php
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: wordpress
+  wordpressVersion:
+    type: string
+    default: "6.5-apache"
+  mysqlVersion:
+    type: string
+    default: "8.4"
+  wordpressPort:
+    type: int
+    default: 8080
+
+modules:
+  mysql:
+    enabled: true
+
+composes:
+  - name: mysql
+    source: https://github.com/kikplate/docker-compose-plates
+    branch: mysql
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/wordpress/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/wordpress/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/wordpress/templates/README.md.tmpl

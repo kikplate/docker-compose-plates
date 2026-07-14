@@ -1,0 +1,56 @@
+services:
+{{ if .modules.mysql.enabled }}
+  mysql:
+    image: mysql:{{ .mysqlVersion }}
+    container_name: {{ .projectName }}-mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - wp_net
+
+{{ end }}
+  wordpress:
+    image: wordpress:{{ .wordpressVersion }}
+    container_name: {{ .projectName }}-wordpress
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    ports:
+      - "{{ .wordpressPort }}:80"
+    volumes:
+      - wordpress_data:/var/www/html
+{{ if .modules.mysql.enabled }}
+    depends_on:
+      mysql:
+        condition: service_healthy
+{{ end }}
+    networks:
+      - wp_net
+
+volumes:
+  wordpress_data:
+{{ if .modules.mysql.enabled }}
+  mysql_data:
+{{ end }}
+networks:
+  wp_net:
+    driver: bridge
