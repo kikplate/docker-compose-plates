@@ -1,0 +1,39 @@
+name: nginx-proxy
+owner: kikplate-public
+description: Nginx reverse proxy with configurable upstream, gzip compression, security headers, health check endpoint, and bridge network isolation.
+version: 1.0.0
+category: networking
+
+tags:
+  - nginx
+  - reverse-proxy
+  - networking
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: nginx-proxy
+  nginxVersion:
+    type: string
+    default: "1.27-alpine"
+  proxyPort:
+    type: int
+    default: 8080
+  upstreamHost:
+    type: string
+    default: app
+  upstreamPort:
+    type: int
+    default: 3000
+  clientMaxBodySize:
+    type: string
+    default: 16m
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/nginx-proxy/templates/docker-compose.yml.tmpl
+  - path: nginx.conf
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/nginx-proxy/templates/nginx.conf.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/nginx-proxy/templates/README.md.tmpl

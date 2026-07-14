@@ -1,0 +1,14 @@
+# {{ .projectName }}
+
+Nginx reverse proxy forwarding to {{ .upstreamHost }}:{{ .upstreamPort }}.
+
+## Quick Start
+
+    docker compose up -d
+
+## Access
+
+* Proxy: http://localhost:{{ .proxyPort }}
+* Health: http://localhost:{{ .proxyPort }}/health
+
+Edit nginx.conf to change upstream targets or add additional server blocks.
