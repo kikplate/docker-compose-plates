@@ -3,12 +3,17 @@ services:
     image: axllent/mailpit:{{ .mailpitVersion }}
     container_name: {{ .projectName }}-mailpit
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "{{ .smtpPort }}:1025"
       - "{{ .webPort }}:8025"
     environment:
-      MP_MAX_MESSAGES: 500
+      MP_MAX_MESSAGES: {{ .maxMessages }}
       MP_DATA_FILE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: "{{ .smtpAuthAcceptAny }}"
+      MP_UI_AUTH_ENABLED: "{{ .webUiAuthEnabled }}"
     volumes:
       - mailpit_data:/data
     healthcheck:
@@ -16,6 +21,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - mail_net
 

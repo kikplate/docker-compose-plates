@@ -1,0 +1,7 @@
+projectName: "mailpit"
+mailpitVersion: "v1.18"
+smtpPort: 1025
+webPort: 8025
+maxMessages: 500
+smtpAuthAcceptAny: "false"
+webUiAuthEnabled: "false"

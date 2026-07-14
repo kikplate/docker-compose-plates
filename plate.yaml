@@ -25,6 +25,15 @@ schema:
   webPort:
     type: int
     default: 8025
+  maxMessages:
+    type: int
+    default: 500
+  smtpAuthAcceptAny:
+    type: string
+    default: "false"
+  webUiAuthEnabled:
+    type: string
+    default: "false"
 
 files:
   - path: docker-compose.yml
