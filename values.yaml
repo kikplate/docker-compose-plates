@@ -1,0 +1,7 @@
+projectName: "vault"
+vaultVersion: "1.16"
+vaultPort: 8200
+vaultLogLevel: "info"
+vaultUiEnabled: "true"
+vaultMaxLeaseTtl: "768h"
+vaultDefaultLeaseTtl: "768h"

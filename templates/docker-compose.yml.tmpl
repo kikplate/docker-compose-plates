@@ -3,12 +3,20 @@ services:
     image: hashicorp/vault:{{ .vaultVersion }}
     container_name: {{ .projectName }}-vault
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
       VAULT_DEV_ROOT_TOKEN_ID: ${VAULT_DEV_ROOT_TOKEN_ID}
       VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
       VAULT_ADDR: http://127.0.0.1:8200
+      VAULT_LOG_LEVEL: {{ .vaultLogLevel }}
+      VAULT_UI: "{{ .vaultUiEnabled }}"
+      VAULT_DEV_ROOT_TOKEN_ID: ${VAULT_DEV_ROOT_TOKEN_ID}
+      VAULT_MAX_LEASE_TTL: {{ .vaultMaxLeaseTtl }}
+      VAULT_DEFAULT_LEASE_TTL: {{ .vaultDefaultLeaseTtl }}
     ports:
       - "{{ .vaultPort }}:8200"
     cap_add:
@@ -19,6 +27,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - vault_net
 
