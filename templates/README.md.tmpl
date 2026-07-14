@@ -1,0 +1,15 @@
+# {{ .projectName }}
+
+MinIO S3-compatible object storage.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* S3 API: http://localhost:{{ .minioApiPort }}
+* Web Console: http://localhost:{{ .minioConsolePort }}
+
+Configure your S3 client with endpoint http://localhost:{{ .minioApiPort }}, the root user as the access key, and the root password as the secret key.

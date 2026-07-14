@@ -1,0 +1,34 @@
+name: minio
+owner: kikplate-public
+description: MinIO S3-compatible object storage with web console, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: storage
+
+tags:
+  - minio
+  - s3
+  - object-storage
+  - storage
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: minio
+  minioVersion:
+    type: string
+    default: "RELEASE.2024-06-13T22-53-53Z"
+  minioApiPort:
+    type: int
+    default: 9000
+  minioConsolePort:
+    type: int
+    default: 9001
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/minio/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/minio/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/minio/templates/README.md.tmpl

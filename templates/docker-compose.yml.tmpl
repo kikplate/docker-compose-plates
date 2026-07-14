@@ -1,0 +1,31 @@
+services:
+  minio:
+    image: minio/minio:{{ .minioVersion }}
+    container_name: {{ .projectName }}-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    env_file:
+      - .env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "{{ .minioApiPort }}:9000"
+      - "{{ .minioConsolePort }}:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - storage_net
+
+volumes:
+  minio_data:
+
+networks:
+  storage_net:
+    driver: bridge
