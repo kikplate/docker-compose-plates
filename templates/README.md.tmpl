@@ -1,0 +1,16 @@
+# {{ .projectName }}
+
+Prometheus and Grafana monitoring stack.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* Prometheus: http://localhost:{{ .prometheusPort }}
+* Grafana: http://localhost:{{ .grafanaPort }}
+
+Add the Prometheus datasource in Grafana using the URL http://prometheus:9090.
+Edit prometheus.yml to add your scrape targets and reload Prometheus with a POST to /-/reload.

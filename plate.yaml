@@ -1,0 +1,48 @@
+name: prometheus-grafana
+owner: kikplate-public
+description: Prometheus metrics collection with optional Grafana dashboards, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: observability
+
+tags:
+  - prometheus
+  - grafana
+  - monitoring
+  - metrics
+  - observability
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: monitoring
+  prometheusVersion:
+    type: string
+    default: "v2.52.0"
+  grafanaVersion:
+    type: string
+    default: "10.4.2"
+  prometheusPort:
+    type: int
+    default: 9090
+  grafanaPort:
+    type: int
+    default: 3000
+  retentionTime:
+    type: string
+    default: 15d
+
+modules:
+  grafana:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/docker-compose.yml.tmpl
+  - path: prometheus.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/prometheus.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/.env.example.tmpl
+    condition: modules.grafana.enabled
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/README.md.tmpl
