@@ -22,6 +22,12 @@ schema:
   mongoPort:
     type: int
     default: 27017
+  mongoWiredTigerCacheSizeGB:
+    type: string
+    default: "0.5"
+  mongoExpressVersion:
+    type: string
+    default: "1"
   mongoExpressPort:
     type: int
     default: 8081
@@ -33,7 +39,7 @@ modules:
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl

@@ -1,0 +1,10 @@
+projectName: "mongodb"
+mongoVersion: "7"
+mongoPort: 27017
+mongoWiredTigerCacheSizeGB: "0.5"
+mongoExpressVersion: "1"
+mongoExpressPort: 8081
+
+modules:
+  mongoExpress:
+    enabled: true

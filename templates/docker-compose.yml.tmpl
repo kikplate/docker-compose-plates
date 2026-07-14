@@ -3,12 +3,19 @@ services:
     image: mongo:{{ .mongoVersion }}
     container_name: {{ .projectName }}-mongodb
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    command: >
+      mongod
+        --wiredTigerCacheSizeGB {{ .mongoWiredTigerCacheSizeGB }}
+        --logpath /dev/null
     ports:
       - "{{ .mongoPort }}:27017"
     volumes:
@@ -19,13 +26,21 @@ services:
       timeout: 5s
       retries: 5
       start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - db_net
 {{ if .modules.mongoExpress.enabled }}
   mongo-express:
-    image: mongo-express:1
+    image: mongo-express:{{ .mongoExpressVersion }}
     container_name: {{ .projectName }}-mongo-express
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
@@ -34,11 +49,17 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USER}:${MONGO_ROOT_PASSWORD}@mongodb:27017/
       ME_CONFIG_BASICAUTH_USERNAME: ${ME_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
+      ME_CONFIG_OPTIONS_EDITORTHEME: default
     ports:
       - "{{ .mongoExpressPort }}:8081"
     depends_on:
       mongodb:
         condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - db_net
 {{ end }}
