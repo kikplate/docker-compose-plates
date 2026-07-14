@@ -1,4 +1,4 @@
-name: mariadb
+name: mariadb-docker-compose
 owner: kikplate-public
 description: MariaDB 11 database with optional phpMyAdmin web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
