@@ -37,6 +37,6 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mailpit/templates/docker-compose.yml.tmpl
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mailpit/templates/README.md.tmpl
