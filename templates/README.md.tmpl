@@ -1,0 +1,13 @@
+# {{ .projectName }}
+
+MariaDB database with phpMyAdmin web interface.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* MariaDB: localhost:{{ .mariadbPort }}
+* phpMyAdmin: http://localhost:{{ .phpmyadminPort }}

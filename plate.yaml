@@ -1,0 +1,38 @@
+name: mariadb
+owner: kikplate-public
+description: MariaDB 11 database with optional phpMyAdmin web interface, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: database
+
+tags:
+  - mariadb
+  - mysql
+  - database
+  - phpmyadmin
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: mariadb
+  mariadbVersion:
+    type: string
+    default: "11"
+  mariadbPort:
+    type: int
+    default: 3306
+  phpmyadminPort:
+    type: int
+    default: 8080
+
+modules:
+  phpmyadmin:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mariadb/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mariadb/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mariadb/templates/README.md.tmpl

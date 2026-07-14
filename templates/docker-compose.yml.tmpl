@@ -1,0 +1,46 @@
+services:
+  mariadb:
+    image: mariadb:{{ .mariadbVersion }}
+    container_name: {{ .projectName }}-mariadb
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "{{ .mariadbPort }}:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - db_net
+{{ if .modules.phpmyadmin.enabled }}
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: {{ .projectName }}-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    ports:
+      - "{{ .phpmyadminPort }}:80"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - db_net
+{{ end }}
+volumes:
+  mariadb_data:
+
+networks:
+  db_net:
+    driver: bridge
