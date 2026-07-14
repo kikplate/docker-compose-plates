@@ -2,7 +2,7 @@ name: traefik
 owner: kikplate-public
 description: Traefik v3 reverse proxy and load balancer with Docker provider, automatic service discovery, and dashboard.
 version: 1.0.0
-category: networking
+category: devops
 
 tags:
   - traefik
