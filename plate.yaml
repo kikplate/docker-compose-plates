@@ -1,4 +1,4 @@
-name: wordpress
+name: wordpress-docker-compose
 owner: kikplate-public
 description: WordPress CMS. Composes the mysql plate for its database. The mysql module can be disabled when using an external MySQL instance.
 version: 1.0.0
