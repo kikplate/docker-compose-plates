@@ -1,0 +1,7 @@
+projectName: "registry"
+registryPort: 5000
+registryUiPort: 8080
+
+modules:
+  registryUi:
+    enabled: true
