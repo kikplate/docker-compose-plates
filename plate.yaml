@@ -57,11 +57,11 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/docker-compose.yml.tmpl
   - path: docker-compose.postgres.yml
-    template: ../../postgres/templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/docker-compose.yml.tmpl
     condition: modules.postgres.enabled
   - path: .env
-    template: templates/.env.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/.env.tmpl
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/README.md.tmpl
