@@ -27,6 +27,18 @@ schema:
   dashboardPort:
     type: int
     default: 8080
+  logLevel:
+    type: string
+    default: ERROR
+  accessLog:
+    type: string
+    default: "false"
+  dashboardEnabled:
+    type: string
+    default: "true"
+  apiInsecure:
+    type: string
+    default: "true"
 
 files:
   - path: docker-compose.yml

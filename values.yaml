@@ -1,0 +1,9 @@
+projectName: "traefik"
+traefikVersion: "v3.0"
+httpPort: 80
+httpsPort: 443
+dashboardPort: 8080
+logLevel: "ERROR"
+accessLog: "false"
+dashboardEnabled: "true"
+apiInsecure: "true"

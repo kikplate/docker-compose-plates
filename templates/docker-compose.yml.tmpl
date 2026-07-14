@@ -3,6 +3,9 @@ services:
     image: traefik:{{ .traefikVersion }}
     container_name: {{ .projectName }}-traefik
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     command:
       - --configFile=/etc/traefik/traefik.yml
     ports:
@@ -19,6 +22,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - traefik_net
 
