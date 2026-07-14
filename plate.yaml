@@ -24,8 +24,8 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/vault/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: .env.example
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/vault/templates/.env.example.tmpl
+    template: templates/.env.example.tmpl
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/vault/templates/README.md.tmpl
+    template: templates/README.md.tmpl
