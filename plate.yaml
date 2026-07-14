@@ -1,0 +1,39 @@
+name: mongodb
+owner: kikplate-public
+description: MongoDB 7 document database with optional Mongo Express web interface, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: database
+
+tags:
+  - mongodb
+  - mongo
+  - nosql
+  - database
+  - mongo-express
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: mongodb
+  mongoVersion:
+    type: string
+    default: "7"
+  mongoPort:
+    type: int
+    default: 27017
+  mongoExpressPort:
+    type: int
+    default: 8081
+
+modules:
+  mongoExpress:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mongodb/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mongodb/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mongodb/templates/README.md.tmpl

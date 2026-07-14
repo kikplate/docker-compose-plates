@@ -1,0 +1,50 @@
+services:
+  mongodb:
+    image: mongo:{{ .mongoVersion }}
+    container_name: {{ .projectName }}-mongodb
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    ports:
+      - "{{ .mongoPort }}:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - db_net
+{{ if .modules.mongoExpress.enabled }}
+  mongo-express:
+    image: mongo-express:1
+    container_name: {{ .projectName }}-mongo-express
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USER}:${MONGO_ROOT_PASSWORD}@mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: ${ME_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
+    ports:
+      - "{{ .mongoExpressPort }}:8081"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - db_net
+{{ end }}
+volumes:
+  mongo_data:
+
+networks:
+  db_net:
+    driver: bridge
