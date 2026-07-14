@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Prometheus metrics collection with optional Grafana dashboards, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: devops
+verification_token: 45dc5aec-a54b-415e-857c-382f50723d7a
 
 tags:
   - prometheus
