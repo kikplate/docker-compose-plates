@@ -82,14 +82,14 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/n8n/templates/docker-compose.yml.tmpl
   - path: docker-compose.postgres.yml
-    template: ../../postgres/templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/docker-compose.yml.tmpl
     condition: modules.postgres.enabled
   - path: docker-compose.redis.yml
-    template: ../../redis/templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/redis/templates/docker-compose.yml.tmpl
     condition: modules.redis.enabled
   - path: .env
-    template: templates/.env.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/n8n/templates/.env.tmpl
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/n8n/templates/README.md.tmpl
