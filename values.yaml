@@ -1,0 +1,16 @@
+projectName: "kafka"
+kafkaVersion: "3.7.0"
+kafkaPort: 9092
+kafkaInternalPort: 29092
+kafkaControllerPort: 9093
+kafkaNodeId: 1
+kafkaClusterId: "MkU3OEVBNTcwNTJENDM2Qg"
+kafkaAutoCreateTopics: "true"
+kafkaLogRetentionHours: 168
+kafkaNumPartitions: 1
+kafkaUiVersion: "v0.7.2"
+kafkaUiPort: 8080
+
+modules:
+  kafkaUi:
+    enabled: true
