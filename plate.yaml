@@ -1,0 +1,33 @@
+name: portainer
+owner: kikplate-public
+description: Portainer CE Docker management web UI with persistent storage, health checks, and Docker socket access.
+version: 1.0.0
+category: infrastructure
+
+tags:
+  - portainer
+  - docker
+  - management
+  - ui
+  - infrastructure
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: portainer
+  portainerVersion:
+    type: string
+    default: "2.20.3"
+  portainerPort:
+    type: int
+    default: 9000
+  portainerEdgePort:
+    type: int
+    default: 8000
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/portainer/templates/docker-compose.yml.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/portainer/templates/README.md.tmpl

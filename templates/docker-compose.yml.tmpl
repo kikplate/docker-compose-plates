@@ -1,0 +1,21 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:{{ .portainerVersion }}
+    container_name: {{ .projectName }}-portainer
+    restart: unless-stopped
+    command: --base-url /
+    ports:
+      - "{{ .portainerEdgePort }}:8000"
+      - "{{ .portainerPort }}:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9000/api/system/status"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  portainer_data:
