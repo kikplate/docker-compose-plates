@@ -3,6 +3,7 @@ owner: kikplate-public
 description: MySQL 8 database with optional phpMyAdmin web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: database
+verification_token: 69ababe8-b2a3-4591-a23c-8b0b3a7ae840
 
 tags:
   - mysql
