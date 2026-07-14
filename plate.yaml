@@ -2,7 +2,7 @@ name: mailpit
 owner: kikplate-public
 description: Mailpit local SMTP catch-all server with web UI for testing email sending in development environments.
 version: 1.0.0
-category: dev-tools
+category: backend
 
 tags:
   - mailpit
