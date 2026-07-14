@@ -2,7 +2,7 @@ name: n8n
 owner: kikplate-public
 description: n8n workflow automation platform. Composes the postgres plate for persistent workflow storage. The postgres module can be disabled when using an external PostgreSQL instance.
 version: 1.0.0
-category: automation
+category: backend
 
 tags:
   - n8n
