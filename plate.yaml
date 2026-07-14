@@ -37,14 +37,14 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: loki-config.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/loki-config.yml.tmpl
+    template: templates/loki-config.yml.tmpl
   - path: promtail-config.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/promtail-config.yml.tmpl
+    template: templates/promtail-config.yml.tmpl
     condition: modules.promtail.enabled
   - path: .env.example
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/.env.example.tmpl
+    template: templates/.env.example.tmpl
     condition: modules.grafana.enabled
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/README.md.tmpl
+    template: templates/README.md.tmpl
