@@ -1,4 +1,4 @@
-name: mysql
+name: mysql-docker-compose
 owner: kikplate-public
 description: MySQL 8 database with optional phpMyAdmin web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
