@@ -3,12 +3,16 @@ services:
     image: rabbitmq:{{ .rabbitmqVersion }}-management-alpine
     container_name: {{ .projectName }}-rabbitmq
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+      RABBITMQ_DEFAULT_VHOST: {{ .rabbitmqVhost }}
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: -rabbit log_levels [{connection,{{ .rabbitmqLogLevel }}}] heartbeat {{ .heartbeat }} consumer_timeout {{ .consumerTimeout }}
     ports:
       - "{{ .amqpPort }}:5672"
       - "{{ .managementPort }}:15672"
@@ -20,6 +24,11 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - mq_net
 

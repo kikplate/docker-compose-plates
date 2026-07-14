@@ -24,11 +24,23 @@ schema:
   managementPort:
     type: int
     default: 15672
+  rabbitmqVhost:
+    type: string
+    default: /
+  rabbitmqLogLevel:
+    type: string
+    default: warning
+  heartbeat:
+    type: int
+    default: 60
+  consumerTimeout:
+    type: int
+    default: 1800000
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl

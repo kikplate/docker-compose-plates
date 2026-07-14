@@ -1,0 +1,8 @@
+projectName: "rabbitmq"
+rabbitmqVersion: "3.13"
+amqpPort: 5672
+managementPort: 15672
+rabbitmqVhost: "/"
+rabbitmqLogLevel: "warning"
+heartbeat: 60
+consumerTimeout: 1800000
