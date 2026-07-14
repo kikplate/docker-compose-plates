@@ -2,7 +2,7 @@ name: redis
 owner: kikplate-public
 description: Redis 7 in-memory data store with password authentication, AOF persistence, and optional Redis Commander web interface.
 version: 1.0.0
-category: cache
+category: database
 
 tags:
   - redis
