@@ -3,6 +3,7 @@ owner: kikplate-public
 description: WordPress CMS. Composes the mysql plate for its database. The mysql module can be disabled when using an external MySQL instance.
 version: 1.0.0
 category: other
+verification_token: 1af817d1-084d-4b4f-b74b-0771ff63639b
 
 tags:
   - wordpress
