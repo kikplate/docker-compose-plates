@@ -1,4 +1,4 @@
-name: rabbitmq
+name: rabbitmq-docker-compose
 owner: kikplate-public
 description: RabbitMQ 3 AMQP message broker with management plugin, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
