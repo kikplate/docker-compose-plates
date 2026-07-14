@@ -1,0 +1,33 @@
+name: docker-registry
+owner: kikplate-public
+description: Private Docker Registry v2 with optional web UI, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: infrastructure
+
+tags:
+  - docker-registry
+  - registry
+  - container-registry
+  - infrastructure
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: registry
+  registryPort:
+    type: int
+    default: 5000
+  registryUiPort:
+    type: int
+    default: 8080
+
+modules:
+  registryUi:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/docker-registry/templates/docker-compose.yml.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/docker-registry/templates/README.md.tmpl

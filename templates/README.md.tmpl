@@ -1,0 +1,17 @@
+# {{ .projectName }}
+
+Private Docker Registry with web UI.
+
+## Quick Start
+
+    docker compose up -d
+
+## Access
+
+* Registry API: http://localhost:{{ .registryPort }}/v2/
+* Registry UI: http://localhost:{{ .registryUiPort }}
+
+## Pushing Images
+
+    docker tag myimage localhost:{{ .registryPort }}/myimage:latest
+    docker push localhost:{{ .registryPort }}/myimage:latest

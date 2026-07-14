@@ -1,0 +1,43 @@
+services:
+  registry:
+    image: registry:2
+    container_name: {{ .projectName }}-registry
+    restart: unless-stopped
+    environment:
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+      REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+    ports:
+      - "{{ .registryPort }}:5000"
+    volumes:
+      - registry_data:/var/lib/registry
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:5000/v2/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - registry_net
+{{ if .modules.registryUi.enabled }}
+  registry-ui:
+    image: joxit/docker-registry-ui:latest
+    container_name: {{ .projectName }}-registry-ui
+    restart: unless-stopped
+    environment:
+      SINGLE_REGISTRY: "true"
+      REGISTRY_TITLE: Local Registry
+      NGINX_PROXY_PASS_URL: http://registry:5000
+      DELETE_IMAGES: "true"
+    ports:
+      - "{{ .registryUiPort }}:80"
+    depends_on:
+      registry:
+        condition: service_healthy
+    networks:
+      - registry_net
+{{ end }}
+volumes:
+  registry_data:
+
+networks:
+  registry_net:
+    driver: bridge
