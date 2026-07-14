@@ -1,0 +1,33 @@
+name: mailpit
+owner: kikplate-public
+description: Mailpit local SMTP catch-all server with web UI for testing email sending in development environments.
+version: 1.0.0
+category: dev-tools
+
+tags:
+  - mailpit
+  - smtp
+  - email
+  - testing
+  - dev-tools
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: mailpit
+  mailpitVersion:
+    type: string
+    default: "v1.18"
+  smtpPort:
+    type: int
+    default: 1025
+  webPort:
+    type: int
+    default: 8025
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mailpit/templates/docker-compose.yml.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/mailpit/templates/README.md.tmpl

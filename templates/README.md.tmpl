@@ -1,0 +1,15 @@
+# {{ .projectName }}
+
+Mailpit SMTP catch-all server for local email testing.
+
+## Quick Start
+
+    docker compose up -d
+
+## Access
+
+* Web UI: http://localhost:{{ .webPort }}
+* SMTP: localhost:{{ .smtpPort }}
+
+Point your application SMTP settings to host localhost port {{ .smtpPort }} with any credentials.
+All sent emails appear in the web UI.

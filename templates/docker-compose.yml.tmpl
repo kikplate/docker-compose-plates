@@ -1,0 +1,27 @@
+services:
+  mailpit:
+    image: axllent/mailpit:{{ .mailpitVersion }}
+    container_name: {{ .projectName }}-mailpit
+    restart: unless-stopped
+    ports:
+      - "{{ .smtpPort }}:1025"
+      - "{{ .webPort }}:8025"
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_DATA_FILE: /data/mailpit.db
+    volumes:
+      - mailpit_data:/data
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mail_net
+
+volumes:
+  mailpit_data:
+
+networks:
+  mail_net:
+    driver: bridge
