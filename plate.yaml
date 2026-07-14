@@ -1,4 +1,4 @@
-name: postgres
+name: postgres-docker-compose
 owner: kikplate-public
 description: PostgreSQL 16 database with optional pgAdmin 4 web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
