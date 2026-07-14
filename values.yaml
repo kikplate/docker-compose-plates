@@ -1,0 +1,15 @@
+projectName: "postgres"
+postgresVersion: "16"
+postgresUser: "app"
+postgresDb: "app"
+postgresPort: 5432
+timezone: "UTC"
+sharedBuffers: "128MB"
+maxConnections: 100
+pgadminVersion: "8"
+pgadminEmail: "admin@example.com"
+pgadminPort: 5050
+
+modules:
+  pgadmin:
+    enabled: true
