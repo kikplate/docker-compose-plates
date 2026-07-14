@@ -1,0 +1,6 @@
+projectName: "elk"
+elasticVersion: "8.14.0"
+esPort: 9200
+kibanaPort: 5601
+logstashBeatsPort: 5044
+logstashTcpPort: 5000

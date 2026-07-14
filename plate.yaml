@@ -32,13 +32,25 @@ schema:
   logstashTcpPort:
     type: int
     default: 5000
+  esJavaOpts:
+    type: string
+    default: "-Xms512m -Xmx512m"
+  lsJavaOpts:
+    type: string
+    default: "-Xms256m -Xmx256m"
+  esClusterName:
+    type: string
+    default: docker-cluster
+  esReplicaCount:
+    type: int
+    default: 0
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
   - path: logstash.conf
     template: templates/logstash.conf.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl
