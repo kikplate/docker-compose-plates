@@ -1,0 +1,13 @@
+projectName: "redis"
+redisVersion: "7"
+redisPort: 6379
+maxMemory: "256mb"
+maxMemoryPolicy: "allkeys-lru"
+appendOnly: "yes"
+savePolicy: "3600 1 300 100 60 10000"
+redisInsightVersion: "2"
+redisInsightPort: 5540
+
+modules:
+  redisInsight:
+    enabled: true

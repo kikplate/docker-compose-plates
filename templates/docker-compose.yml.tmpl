@@ -3,7 +3,17 @@ services:
     image: redis:{{ .redisVersion }}-alpine
     container_name: {{ .projectName }}-redis
     restart: unless-stopped
-    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes --loglevel warning
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    command: >
+      redis-server
+        --requirepass ${REDIS_PASSWORD}
+        --appendonly {{ .appendOnly }}
+        --maxmemory {{ .maxMemory }}
+        --maxmemory-policy {{ .maxMemoryPolicy }}
+        --save {{ .savePolicy }}
+        --loglevel warning
     env_file:
       - .env
     ports:
@@ -15,30 +25,42 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - cache_net
-{{ if .modules.redisCommander.enabled }}
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    container_name: {{ .projectName }}-redis-commander
+{{ if .modules.redisInsight.enabled }}
+  redisinsight:
+    image: redis/redisinsight:{{ .redisInsightVersion }}
+    container_name: {{ .projectName }}-redisinsight
     restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      REDIS_HOSTS: redis:redis:6379:0:${REDIS_PASSWORD}
-      HTTP_USER: ${COMMANDER_USER}
-      HTTP_PASSWORD: ${COMMANDER_PASSWORD}
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     ports:
-      - "{{ .commanderPort }}:8081"
+      - "{{ .redisInsightPort }}:5540"
+    volumes:
+      - redisinsight_data:/data
     depends_on:
       redis:
         condition: service_healthy
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - cache_net
 {{ end }}
 volumes:
   redis_data:
-
+{{ if .modules.redisInsight.enabled }}
+  redisinsight_data:
+{{ end }}
 networks:
   cache_net:
     driver: bridge

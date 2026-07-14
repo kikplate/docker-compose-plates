@@ -21,18 +21,33 @@ schema:
   redisPort:
     type: int
     default: 6379
-  commanderPort:
+  maxMemory:
+    type: string
+    default: "256mb"
+  maxMemoryPolicy:
+    type: string
+    default: allkeys-lru
+  appendOnly:
+    type: string
+    default: "yes"
+  savePolicy:
+    type: string
+    default: "3600 1 300 100 60 10000"
+  redisInsightVersion:
+    type: string
+    default: "2"
+  redisInsightPort:
     type: int
-    default: 8081
+    default: 5540
 
 modules:
-  redisCommander:
+  redisInsight:
     enabled: true
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl
