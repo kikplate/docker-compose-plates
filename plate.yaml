@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Apache Kafka 3 in KRaft mode with optional Kafka UI, persistent named volumes, health checks, and bridge network isolation. No ZooKeeper required.
 version: 1.0.0
 category: backend
+verification_token: 5afc66d7-3e25-4e84-89ee-0c869384b505
 
 tags:
   - kafka
