@@ -35,10 +35,10 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: logstash.conf
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/logstash.conf.tmpl
+    template: templates/logstash.conf.tmpl
   - path: .env.example
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/.env.example.tmpl
+    template: templates/.env.example.tmpl
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/README.md.tmpl
+    template: templates/README.md.tmpl
