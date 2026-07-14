@@ -39,8 +39,8 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/rabbitmq/templates/docker-compose.yml.tmpl
   - path: .env
-    template: templates/.env.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/rabbitmq/templates/.env.tmpl
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/rabbitmq/templates/README.md.tmpl
