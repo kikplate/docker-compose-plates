@@ -1,4 +1,4 @@
-name: vault
+name: vault-docker-compose
 owner: kikplate-public
 description: HashiCorp Vault secrets management in development mode with a web UI and bridge network isolation.
 version: 1.0.0
