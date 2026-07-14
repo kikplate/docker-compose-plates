@@ -1,0 +1,13 @@
+# {{ .projectName }}
+
+MySQL database with phpMyAdmin web interface.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* MySQL: localhost:{{ .mysqlPort }}
+* phpMyAdmin: http://localhost:{{ .phpmyadminPort }}

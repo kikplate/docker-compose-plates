@@ -1,0 +1,46 @@
+services:
+  mysql:
+    image: mysql:{{ .mysqlVersion }}
+    container_name: {{ .projectName }}-mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "{{ .mysqlPort }}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - db_net
+{{ if .modules.phpmyadmin.enabled }}
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: {{ .projectName }}-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "{{ .phpmyadminPort }}:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - db_net
+{{ end }}
+volumes:
+  mysql_data:
+
+networks:
+  db_net:
+    driver: bridge
