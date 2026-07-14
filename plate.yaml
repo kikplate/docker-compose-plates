@@ -2,7 +2,7 @@ name: elk-stack
 owner: kikplate-public
 description: Elasticsearch Logstash and Kibana 8 stack for log aggregation and search, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
-category: observability
+category: devops
 
 tags:
   - elasticsearch
