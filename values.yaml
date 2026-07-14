@@ -1,0 +1,14 @@
+projectName: "n8n"
+n8nVersion: "1.47.1"
+postgresVersion: "16"
+n8nPort: 5678
+n8nTimezone: "UTC"
+n8nHost: "localhost"
+n8nProtocol: "http"
+execProcessMode: "main"
+execTimeout: 3600
+n8nPayloadSizeMax: 16
+
+modules:
+  postgres:
+    enabled: true

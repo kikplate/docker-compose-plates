@@ -25,6 +25,24 @@ schema:
   n8nPort:
     type: int
     default: 5678
+  n8nTimezone:
+    type: string
+    default: UTC
+  n8nHost:
+    type: string
+    default: localhost
+  n8nProtocol:
+    type: string
+    default: http
+  execProcessMode:
+    type: string
+    default: main
+  execTimeout:
+    type: int
+    default: 3600
+  n8nPayloadSizeMax:
+    type: int
+    default: 16
 
 modules:
   postgres:
@@ -38,7 +56,7 @@ composes:
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl

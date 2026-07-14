@@ -4,6 +4,9 @@ services:
     image: postgres:{{ .postgresVersion }}-alpine
     container_name: {{ .projectName }}-postgres
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
@@ -18,6 +21,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - n8n_net
 
@@ -26,6 +34,9 @@ services:
     image: n8nio/n8n:{{ .n8nVersion }}
     container_name: {{ .projectName }}-n8n
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
@@ -39,7 +50,12 @@ services:
       N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER}
       N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD}
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
-      GENERIC_TIMEZONE: UTC
+      GENERIC_TIMEZONE: {{ .n8nTimezone }}
+      N8N_HOST: {{ .n8nHost }}
+      N8N_PROTOCOL: {{ .n8nProtocol }}
+      EXECUTIONS_PROCESS: {{ .execProcessMode }}
+      EXECUTIONS_TIMEOUT: {{ .execTimeout }}
+      N8N_PAYLOAD_SIZE_MAX: {{ .n8nPayloadSizeMax }}
     ports:
       - "{{ .n8nPort }}:5678"
     volumes:
@@ -49,6 +65,11 @@ services:
       postgres:
         condition: service_healthy
 {{ end }}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - n8n_net
 
