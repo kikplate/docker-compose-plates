@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Private Docker Registry v2 with optional web UI, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: devops
+verification_token: 2743386f-8b22-493f-bc98-d56e5974731d
 
 tags:
   - docker-registry
