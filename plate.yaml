@@ -2,7 +2,7 @@ name: portainer
 owner: kikplate-public
 description: Portainer CE Docker management web UI with persistent storage, health checks, and Docker socket access.
 version: 1.0.0
-category: infrastructure
+category: devops
 
 tags:
   - portainer
