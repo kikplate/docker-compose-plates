@@ -1,4 +1,4 @@
-name: mongodb
+name: mongodb-docker-compose
 owner: kikplate-public
 description: MongoDB 7 document database with optional Mongo Express web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
