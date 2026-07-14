@@ -1,0 +1,13 @@
+projectName: "mysql"
+mysqlVersion: "8.4"
+mysqlUser: "app"
+mysqlDb: "app"
+mysqlPort: 3306
+mysqlCharset: "utf8mb4"
+mysqlCollation: "utf8mb4_unicode_ci"
+phpmyadminVersion: "5"
+phpmyadminPort: 8080
+
+modules:
+  phpmyadmin:
+    enabled: true

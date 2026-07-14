@@ -17,9 +17,24 @@ schema:
   mysqlVersion:
     type: string
     default: "8.4"
+  mysqlUser:
+    type: string
+    default: app
+  mysqlDb:
+    type: string
+    default: app
   mysqlPort:
     type: int
     default: 3306
+  mysqlCharset:
+    type: string
+    default: utf8mb4
+  mysqlCollation:
+    type: string
+    default: utf8mb4_unicode_ci
+  phpmyadminVersion:
+    type: string
+    default: "5"
   phpmyadminPort:
     type: int
     default: 8080
@@ -31,7 +46,7 @@ modules:
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl
