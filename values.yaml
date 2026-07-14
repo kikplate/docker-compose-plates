@@ -1,13 +1,24 @@
 projectName: "wordpress"
 wordpressVersion: "6.5-apache"
 mysqlVersion: "8.4"
+mysqlPort: 3306
+mysqlCharset: "utf8mb4"
+mysqlCollation: "utf8mb4_unicode_ci"
 wordpressPort: 8080
 wordpressDebug: "false"
 wordpressTablePrefix: "wp_"
 phpMemoryLimit: "256M"
 maxUploadSize: "64M"
 wordpressAdminEmail: "admin@example.com"
+redisVersion: "7"
+redisPort: 6379
+maxMemory: "256mb"
+maxMemoryPolicy: "allkeys-lru"
+appendOnly: "yes"
+savePolicy: "3600 1 300 100 60 10000"
 
 modules:
   mysql:
     enabled: true
+  redis:
+    enabled: false

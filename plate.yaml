@@ -21,6 +21,15 @@ schema:
   mysqlVersion:
     type: string
     default: "8.4"
+  mysqlPort:
+    type: int
+    default: 3306
+  mysqlCharset:
+    type: string
+    default: utf8mb4
+  mysqlCollation:
+    type: string
+    default: utf8mb4_unicode_ci
   wordpressPort:
     type: int
     default: 8080
@@ -39,19 +48,40 @@ schema:
   wordpressAdminEmail:
     type: string
     default: admin@example.com
+  redisVersion:
+    type: string
+    default: "7"
+  redisPort:
+    type: int
+    default: 6379
+  maxMemory:
+    type: string
+    default: "256mb"
+  maxMemoryPolicy:
+    type: string
+    default: allkeys-lru
+  appendOnly:
+    type: string
+    default: "yes"
+  savePolicy:
+    type: string
+    default: "3600 1 300 100 60 10000"
 
 modules:
   mysql:
     enabled: true
-
-composes:
-  - name: mysql
-    source: https://github.com/kikplate/docker-compose-plates
-    branch: mysql
+  redis:
+    enabled: false
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
+  - path: docker-compose.mysql.yml
+    template: ../mysql/templates/docker-compose.yml.tmpl
+    condition: modules.mysql.enabled
+  - path: docker-compose.redis.yml
+    template: ../redis/templates/docker-compose.yml.tmpl
+    condition: modules.redis.enabled
   - path: .env
     template: templates/.env.tmpl
   - path: README.md

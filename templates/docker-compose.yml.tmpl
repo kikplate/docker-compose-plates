@@ -1,37 +1,11 @@
-services:
 {{ if .modules.mysql.enabled }}
-  mysql:
-    image: mysql:{{ .mysqlVersion }}
-    container_name: {{ .projectName }}-mysql
-    restart: unless-stopped
-    stop_grace_period: 30s
-    security_opt:
-      - no-new-privileges:true
-    env_file:
-      - .env
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - mysql_data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-    networks:
-      - wp_net
-
+include:
+  - docker-compose.mysql.yml
 {{ end }}
+{{ if .modules.redis.enabled }}
+  - docker-compose.redis.yml
+{{ end }}
+services:
   wordpress:
     image: wordpress:{{ .wordpressVersion }}
     container_name: {{ .projectName }}-wordpress
@@ -52,6 +26,13 @@ services:
         define('WP_MEMORY_LIMIT', '{{ .phpMemoryLimit }}');
         @ini_set('upload_max_filesize', '{{ .maxUploadSize }}');
         @ini_set('post_max_size', '{{ .maxUploadSize }}');
+{{ if .modules.redis.enabled }}
+        define('WP_REDIS_HOST', 'redis');
+        define('WP_REDIS_PORT', {{ .redisPort }});
+        define('WP_REDIS_PASSWORD', getenv('REDIS_PASSWORD'));
+        define('WP_CACHE_KEY_SALT', '{{ .projectName }}:');
+        define('WP_CACHE', true);
+{{ end }}
     ports:
       - "{{ .wordpressPort }}:80"
     volumes:
@@ -68,12 +49,16 @@ services:
         max-file: "3"
     networks:
       - wp_net
+{{ if .modules.mysql.enabled }}
+      - db_net
+{{ end }}
+{{ if .modules.redis.enabled }}
+      - cache_net
+{{ end }}
 
 volumes:
   wordpress_data:
-{{ if .modules.mysql.enabled }}
-  mysql_data:
-{{ end }}
+
 networks:
   wp_net:
     driver: bridge
