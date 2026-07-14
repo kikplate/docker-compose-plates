@@ -3,7 +3,7 @@ owner: kikplate-public
 description: PostgreSQL 16 database with optional pgAdmin 4 web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: database
-verification_token: 8aca2691-467b-4425-ab70-600216bcf51c
+verification_token: d06c553b-5048-47e7-8de5-aad6647dd94e
 
 tags:
   - postgres
