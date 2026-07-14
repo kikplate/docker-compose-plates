@@ -3,6 +3,7 @@ owner: kikplate-public
 description: MongoDB 7 document database with optional Mongo Express web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: database
+verification_token: efd187ff-5d02-4b1a-b191-5362fa5a6bc3
 
 tags:
   - mongodb
