@@ -1,0 +1,44 @@
+name: n8n
+owner: kikplate-public
+description: n8n workflow automation platform. Composes the postgres plate for persistent workflow storage. The postgres module can be disabled when using an external PostgreSQL instance.
+version: 1.0.0
+category: automation
+
+tags:
+  - n8n
+  - workflow
+  - automation
+  - no-code
+  - integration
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: n8n
+  n8nVersion:
+    type: string
+    default: "1.47.1"
+  postgresVersion:
+    type: string
+    default: "16"
+  n8nPort:
+    type: int
+    default: 5678
+
+modules:
+  postgres:
+    enabled: true
+
+composes:
+  - name: postgres
+    source: https://github.com/kikplate/docker-compose-plates
+    branch: postgres
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/n8n/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/n8n/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/n8n/templates/README.md.tmpl
