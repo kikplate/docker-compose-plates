@@ -2,7 +2,7 @@ name: nginx-proxy
 owner: kikplate-public
 description: Nginx reverse proxy with configurable upstream, gzip compression, security headers, health check endpoint, and bridge network isolation.
 version: 1.0.0
-category: networking
+category: devops
 
 tags:
   - nginx
