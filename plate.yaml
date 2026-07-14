@@ -22,6 +22,18 @@ schema:
   postgresVersion:
     type: string
     default: "16"
+  postgresPort:
+    type: int
+    default: 5432
+  timezone:
+    type: string
+    default: UTC
+  sharedBuffers:
+    type: string
+    default: "128MB"
+  maxConnections:
+    type: int
+    default: 100
   n8nPort:
     type: int
     default: 5678
@@ -43,19 +55,40 @@ schema:
   n8nPayloadSizeMax:
     type: int
     default: 16
+  redisVersion:
+    type: string
+    default: "7"
+  redisPort:
+    type: int
+    default: 6379
+  maxMemory:
+    type: string
+    default: "256mb"
+  maxMemoryPolicy:
+    type: string
+    default: allkeys-lru
+  appendOnly:
+    type: string
+    default: "yes"
+  savePolicy:
+    type: string
+    default: "3600 1 300 100 60 10000"
 
 modules:
   postgres:
     enabled: true
-
-composes:
-  - name: postgres
-    source: https://github.com/kikplate/docker-compose-plates
-    branch: postgres
+  redis:
+    enabled: false
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
+  - path: docker-compose.postgres.yml
+    template: ../postgres/templates/docker-compose.yml.tmpl
+    condition: modules.postgres.enabled
+  - path: docker-compose.redis.yml
+    template: ../redis/templates/docker-compose.yml.tmpl
+    condition: modules.redis.enabled
   - path: .env
     template: templates/.env.tmpl
   - path: README.md

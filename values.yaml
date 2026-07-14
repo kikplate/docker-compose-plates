@@ -1,6 +1,10 @@
 projectName: "n8n"
 n8nVersion: "1.47.1"
 postgresVersion: "16"
+postgresPort: 5432
+timezone: "UTC"
+sharedBuffers: "128MB"
+maxConnections: 100
 n8nPort: 5678
 n8nTimezone: "UTC"
 n8nHost: "localhost"
@@ -8,7 +12,15 @@ n8nProtocol: "http"
 execProcessMode: "main"
 execTimeout: 3600
 n8nPayloadSizeMax: 16
+redisVersion: "7"
+redisPort: 6379
+maxMemory: "256mb"
+maxMemoryPolicy: "allkeys-lru"
+appendOnly: "yes"
+savePolicy: "3600 1 300 100 60 10000"
 
 modules:
   postgres:
     enabled: true
+  redis:
+    enabled: false
