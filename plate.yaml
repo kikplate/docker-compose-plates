@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Traefik v3 reverse proxy and load balancer with Docker provider, automatic service discovery, and dashboard.
 version: 1.0.0
 category: devops
+verification_token: 956d85e5-94b5-4956-8525-5951ab1a583c
 
 tags:
   - traefik
