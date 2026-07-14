@@ -1,0 +1,17 @@
+# {{ .projectName }}
+
+Elasticsearch Logstash and Kibana log aggregation stack.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* Elasticsearch: http://localhost:{{ .esPort }}
+* Kibana: http://localhost:{{ .kibanaPort }}
+* Logstash Beats input: localhost:{{ .logstashBeatsPort }}
+* Logstash TCP input: localhost:{{ .logstashTcpPort }}
+
+Send JSON log lines to the TCP input: echo '{"message": "hello"}' | nc localhost {{ .logstashTcpPort }}

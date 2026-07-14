@@ -1,0 +1,44 @@
+name: elk-stack
+owner: kikplate-public
+description: Elasticsearch Logstash and Kibana 8 stack for log aggregation and search, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: observability
+
+tags:
+  - elasticsearch
+  - logstash
+  - kibana
+  - elk
+  - logging
+  - observability
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: elk
+  elasticVersion:
+    type: string
+    default: "8.14.0"
+  esPort:
+    type: int
+    default: 9200
+  kibanaPort:
+    type: int
+    default: 5601
+  logstashBeatsPort:
+    type: int
+    default: 5044
+  logstashTcpPort:
+    type: int
+    default: 5000
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/docker-compose.yml.tmpl
+  - path: logstash.conf
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/logstash.conf.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/elk-stack/templates/README.md.tmpl
