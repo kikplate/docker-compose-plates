@@ -72,17 +72,17 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/docker-compose.yml.tmpl
   - path: docker-compose.postgres.yml
-    template: ../../postgres/templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/docker-compose.yml.tmpl
     condition: modules.postgres.enabled
   - path: loki-config.yml
-    template: templates/loki-config.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/loki-config.yml.tmpl
   - path: promtail-config.yml
-    template: templates/promtail-config.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/promtail-config.yml.tmpl
     condition: modules.promtail.enabled
   - path: .env
-    template: templates/.env.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/.env.tmpl
     condition: modules.grafana.enabled
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/README.md.tmpl
