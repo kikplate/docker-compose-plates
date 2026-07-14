@@ -3,6 +3,7 @@ owner: kikplate-public
 description: MinIO S3-compatible object storage with web console, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: backend
+verification_token: 713ca45c-9d82-44d3-b6d0-6f3d280ecf00
 
 tags:
   - minio
