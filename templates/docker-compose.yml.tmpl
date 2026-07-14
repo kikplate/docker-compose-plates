@@ -1,0 +1,44 @@
+services:
+  redis:
+    image: redis:{{ .redisVersion }}-alpine
+    container_name: {{ .projectName }}-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes --loglevel warning
+    env_file:
+      - .env
+    ports:
+      - "{{ .redisPort }}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cache_net
+{{ if .modules.redisCommander.enabled }}
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: {{ .projectName }}-redis-commander
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      REDIS_HOSTS: redis:redis:6379:0:${REDIS_PASSWORD}
+      HTTP_USER: ${COMMANDER_USER}
+      HTTP_PASSWORD: ${COMMANDER_PASSWORD}
+    ports:
+      - "{{ .commanderPort }}:8081"
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - cache_net
+{{ end }}
+volumes:
+  redis_data:
+
+networks:
+  cache_net:
+    driver: bridge

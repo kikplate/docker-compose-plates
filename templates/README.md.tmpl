@@ -1,0 +1,13 @@
+# {{ .projectName }}
+
+Redis in-memory data store with Redis Commander web interface.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* Redis: localhost:{{ .redisPort }}
+* Redis Commander: http://localhost:{{ .commanderPort }}

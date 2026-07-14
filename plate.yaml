@@ -1,0 +1,38 @@
+name: redis
+owner: kikplate-public
+description: Redis 7 in-memory data store with password authentication, AOF persistence, and optional Redis Commander web interface.
+version: 1.0.0
+category: cache
+
+tags:
+  - redis
+  - cache
+  - in-memory
+  - redis-commander
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: redis
+  redisVersion:
+    type: string
+    default: "7"
+  redisPort:
+    type: int
+    default: 6379
+  commanderPort:
+    type: int
+    default: 8081
+
+modules:
+  redisCommander:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/redis/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/redis/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/redis/templates/README.md.tmpl
