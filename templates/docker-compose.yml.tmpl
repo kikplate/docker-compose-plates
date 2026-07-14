@@ -1,0 +1,63 @@
+services:
+{{ if .modules.postgres.enabled }}
+  postgres:
+    image: postgres:{{ .postgresVersion }}-alpine
+    container_name: {{ .projectName }}-postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${KC_DB_USERNAME}
+      POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
+      POSTGRES_DB: keycloak
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${KC_DB_USERNAME} -d keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - kc_net
+
+{{ end }}
+  keycloak:
+    image: quay.io/keycloak/keycloak:{{ .keycloakVersion }}
+    container_name: {{ .projectName }}-keycloak
+    restart: unless-stopped
+    command: start-dev
+    env_file:
+      - .env
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_HTTP_PORT: 8080
+    ports:
+      - "{{ .keycloakPort }}:8080"
+{{ if .modules.postgres.enabled }}
+    depends_on:
+      postgres:
+        condition: service_healthy
+{{ end }}
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080 && echo -e 'GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' >&3 && cat <&3 | grep -q '200 OK'"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    networks:
+      - kc_net
+
+volumes:
+{{ if .modules.postgres.enabled }}
+  postgres_data:
+{{ end }}
+
+networks:
+  kc_net:
+    driver: bridge

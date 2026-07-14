@@ -1,0 +1,45 @@
+name: keycloak
+owner: kikplate-public
+description: Keycloak 24 identity and access management. Composes the postgres plate for its database. The postgres module can be disabled when using an external PostgreSQL instance.
+version: 1.0.0
+category: auth
+
+tags:
+  - keycloak
+  - iam
+  - auth
+  - oauth2
+  - oidc
+  - sso
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: keycloak
+  keycloakVersion:
+    type: string
+    default: "24.0"
+  postgresVersion:
+    type: string
+    default: "16"
+  keycloakPort:
+    type: int
+    default: 8080
+
+modules:
+  postgres:
+    enabled: true
+
+composes:
+  - name: postgres
+    source: https://github.com/kikplate/docker-compose-plates
+    branch: postgres
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/README.md.tmpl

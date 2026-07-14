@@ -1,0 +1,15 @@
+# {{ .projectName }}
+
+Keycloak identity and access management with PostgreSQL.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* Keycloak Admin: http://localhost:{{ .keycloakPort }}/admin
+
+Log in with the admin credentials set in your .env file.
+The start-dev command enables development mode. Use start with production configuration for production deployments.
