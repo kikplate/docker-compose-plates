@@ -28,6 +28,6 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/portainer/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/portainer/templates/README.md.tmpl
+    template: templates/README.md.tmpl
