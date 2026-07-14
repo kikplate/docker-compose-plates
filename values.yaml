@@ -8,7 +8,16 @@ scrapeInterval: "15s"
 evaluationInterval: "15s"
 grafanaLogLevel: "warn"
 grafanaAllowSignUp: "false"
+postgresVersion: "16"
+postgresPort: 5432
+postgresUser: "grafana"
+postgresDb: "grafana"
+timezone: "UTC"
+sharedBuffers: "128MB"
+maxConnections: 100
 
 modules:
   grafana:
     enabled: true
+  postgres:
+    enabled: false

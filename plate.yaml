@@ -43,14 +43,40 @@ schema:
   grafanaAllowSignUp:
     type: string
     default: "false"
+  postgresVersion:
+    type: string
+    default: "16"
+  postgresPort:
+    type: int
+    default: 5432
+  postgresUser:
+    type: string
+    default: grafana
+  postgresDb:
+    type: string
+    default: grafana
+  timezone:
+    type: string
+    default: UTC
+  sharedBuffers:
+    type: string
+    default: "128MB"
+  maxConnections:
+    type: int
+    default: 100
 
 modules:
   grafana:
     enabled: true
+  postgres:
+    enabled: false
 
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
+  - path: docker-compose.postgres.yml
+    template: ../postgres/templates/docker-compose.yml.tmpl
+    condition: modules.postgres.enabled
   - path: prometheus.yml
     template: templates/prometheus.yml.tmpl
   - path: .env
