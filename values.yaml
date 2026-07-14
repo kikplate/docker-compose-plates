@@ -1,0 +1,14 @@
+projectName: "monitoring"
+prometheusVersion: "v2.52.0"
+grafanaVersion: "10.4.2"
+prometheusPort: 9090
+grafanaPort: 3000
+retentionTime: "15d"
+scrapeInterval: "15s"
+evaluationInterval: "15s"
+grafanaLogLevel: "warn"
+grafanaAllowSignUp: "false"
+
+modules:
+  grafana:
+    enabled: true

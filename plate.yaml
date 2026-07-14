@@ -31,6 +31,18 @@ schema:
   retentionTime:
     type: string
     default: 15d
+  scrapeInterval:
+    type: string
+    default: "15s"
+  evaluationInterval:
+    type: string
+    default: "15s"
+  grafanaLogLevel:
+    type: string
+    default: warn
+  grafanaAllowSignUp:
+    type: string
+    default: "false"
 
 modules:
   grafana:
@@ -41,8 +53,8 @@ files:
     template: templates/docker-compose.yml.tmpl
   - path: prometheus.yml
     template: templates/prometheus.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
     condition: modules.grafana.enabled
   - path: README.md
     template: templates/README.md.tmpl
