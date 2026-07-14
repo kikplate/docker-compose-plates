@@ -1,4 +1,4 @@
-name: docker-registry
+name: docker-registry-docker-compose
 owner: kikplate-public
 description: Private Docker Registry v2 with optional web UI, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
