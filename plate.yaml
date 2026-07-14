@@ -1,0 +1,50 @@
+name: loki-grafana
+owner: kikplate-public
+description: Grafana Loki log aggregation with optional Promtail agent and optional Grafana dashboards, persistent named volumes, and bridge network isolation.
+version: 1.0.0
+category: observability
+
+tags:
+  - loki
+  - promtail
+  - grafana
+  - logging
+  - observability
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: loki
+  lokiVersion:
+    type: string
+    default: "2.9.8"
+  grafanaVersion:
+    type: string
+    default: "10.4.2"
+  lokiPort:
+    type: int
+    default: 3100
+  grafanaPort:
+    type: int
+    default: 3000
+
+modules:
+  promtail:
+    enabled: true
+  grafana:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/docker-compose.yml.tmpl
+  - path: loki-config.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/loki-config.yml.tmpl
+  - path: promtail-config.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/promtail-config.yml.tmpl
+    condition: modules.promtail.enabled
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/.env.example.tmpl
+    condition: modules.grafana.enabled
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/loki-grafana/templates/README.md.tmpl

@@ -1,0 +1,16 @@
+# {{ .projectName }}
+
+Grafana Loki log aggregation with Promtail and Grafana.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* Loki API: http://localhost:{{ .lokiPort }}
+* Grafana: http://localhost:{{ .grafanaPort }}
+
+Add the Loki datasource in Grafana using the URL http://loki:3100.
+Promtail automatically collects logs from all running Docker containers.
