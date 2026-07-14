@@ -3,6 +3,7 @@ owner: kikplate-public
 description: RabbitMQ 3 AMQP message broker with management plugin, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: backend
+verification_token: 937a7b2f-ed0d-4fb6-97ea-25ed1e93ced5
 
 tags:
   - rabbitmq
