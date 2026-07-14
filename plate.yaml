@@ -77,10 +77,10 @@ files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
   - path: docker-compose.mysql.yml
-    template: ../mysql/templates/docker-compose.yml.tmpl
+    template: ../../mysql/templates/docker-compose.yml.tmpl
     condition: modules.mysql.enabled
   - path: docker-compose.redis.yml
-    template: ../redis/templates/docker-compose.yml.tmpl
+    template: ../../redis/templates/docker-compose.yml.tmpl
     condition: modules.redis.enabled
   - path: .env
     template: templates/.env.tmpl
