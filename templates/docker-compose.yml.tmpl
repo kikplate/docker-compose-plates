@@ -1,0 +1,31 @@
+services:
+  traefik:
+    image: traefik:{{ .traefikVersion }}
+    container_name: {{ .projectName }}-traefik
+    restart: unless-stopped
+    command:
+      - --configFile=/etc/traefik/traefik.yml
+    ports:
+      - "{{ .httpPort }}:80"
+      - "{{ .httpsPort }}:443"
+      - "{{ .dashboardPort }}:8080"
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_certs:/certs
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - traefik_net
+
+volumes:
+  traefik_certs:
+
+networks:
+  traefik_net:
+    external: false
+    driver: bridge

@@ -1,0 +1,22 @@
+# {{ .projectName }}
+
+Traefik reverse proxy with Docker provider auto-discovery.
+
+## Quick Start
+
+    docker compose up -d
+
+## Access
+
+* HTTP: http://localhost:{{ .httpPort }}
+* HTTPS: https://localhost:{{ .httpsPort }}
+* Dashboard: http://localhost:{{ .dashboardPort }}/dashboard/
+
+## Exposing a Service
+
+Add these labels to any container on the traefik_net network:
+
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.myapp.rule: Host(`myapp.localhost`)
+      traefik.http.services.myapp.loadbalancer.server.port: "3000"

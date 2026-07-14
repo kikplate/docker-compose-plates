@@ -1,0 +1,37 @@
+name: traefik
+owner: kikplate-public
+description: Traefik v3 reverse proxy and load balancer with Docker provider, automatic service discovery, and dashboard.
+version: 1.0.0
+category: networking
+
+tags:
+  - traefik
+  - reverse-proxy
+  - load-balancer
+  - ingress
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: traefik
+  traefikVersion:
+    type: string
+    default: "v3.0"
+  httpPort:
+    type: int
+    default: 80
+  httpsPort:
+    type: int
+    default: 443
+  dashboardPort:
+    type: int
+    default: 8080
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/traefik/templates/docker-compose.yml.tmpl
+  - path: traefik.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/traefik/templates/traefik.yml.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/traefik/templates/README.md.tmpl
