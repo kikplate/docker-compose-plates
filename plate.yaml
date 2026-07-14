@@ -3,6 +3,7 @@ owner: kikplate-public
 description: HashiCorp Vault secrets management in development mode with a web UI and bridge network isolation.
 version: 1.0.0
 category: security
+verification_token: c1e59bb2-4151-40bb-a5f5-8bdd03bf16d1
 
 tags:
   - vault
