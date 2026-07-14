@@ -30,8 +30,8 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/traefik/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: traefik.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/traefik/templates/traefik.yml.tmpl
+    template: templates/traefik.yml.tmpl
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/traefik/templates/README.md.tmpl
+    template: templates/README.md.tmpl
