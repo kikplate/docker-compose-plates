@@ -19,6 +19,9 @@ schema:
   lokiVersion:
     type: string
     default: "2.9.8"
+  promtailVersion:
+    type: string
+    default: "2.9.8"
   grafanaVersion:
     type: string
     default: "10.4.2"
@@ -28,6 +31,15 @@ schema:
   grafanaPort:
     type: int
     default: 3000
+  lokiRetentionPeriod:
+    type: string
+    default: "744h"
+  grafanaLogLevel:
+    type: string
+    default: warn
+  grafanaAllowSignUp:
+    type: string
+    default: "false"
 
 modules:
   promtail:
@@ -43,8 +55,8 @@ files:
   - path: promtail-config.yml
     template: templates/promtail-config.yml.tmpl
     condition: modules.promtail.enabled
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
     condition: modules.grafana.enabled
   - path: README.md
     template: templates/README.md.tmpl

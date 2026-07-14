@@ -1,0 +1,15 @@
+projectName: "loki"
+lokiVersion: "2.9.8"
+promtailVersion: "2.9.8"
+grafanaVersion: "10.4.2"
+lokiPort: 3100
+grafanaPort: 3000
+lokiRetentionPeriod: "744h"
+grafanaLogLevel: "warn"
+grafanaAllowSignUp: "false"
+
+modules:
+  promtail:
+    enabled: true
+  grafana:
+    enabled: true
