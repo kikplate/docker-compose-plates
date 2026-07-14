@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Nginx reverse proxy with configurable upstream, gzip compression, security headers, health check endpoint, and bridge network isolation.
 version: 1.0.0
 category: devops
+verification_token: e5b5dcee-66e8-4d2a-8a1a-7b84e73698b8
 
 tags:
   - nginx
