@@ -3,6 +3,7 @@ owner: kikplate-public
 description: MariaDB 11 database with optional phpMyAdmin web interface, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: database
+verification_token: 39388a1b-79ff-412e-b5c3-317240f7df6b
 
 tags:
   - mariadb
