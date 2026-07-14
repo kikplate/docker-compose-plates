@@ -1,0 +1,12 @@
+projectName: "keycloak"
+keycloakVersion: "24.0"
+postgresVersion: "16"
+keycloakPort: 8080
+keycloakLogLevel: "INFO"
+keycloakMetricsEnabled: "true"
+keycloakHealthEnabled: "true"
+keycloakHttpRelativePath: "/"
+
+modules:
+  postgres:
+    enabled: true

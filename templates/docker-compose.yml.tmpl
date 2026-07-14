@@ -4,6 +4,9 @@ services:
     image: postgres:{{ .postgresVersion }}-alpine
     container_name: {{ .projectName }}-postgres
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
@@ -18,6 +21,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - kc_net
 
@@ -26,6 +34,9 @@ services:
     image: quay.io/keycloak/keycloak:{{ .keycloakVersion }}
     container_name: {{ .projectName }}-keycloak
     restart: unless-stopped
+    stop_grace_period: 60s
+    security_opt:
+      - no-new-privileges:true
     command: start-dev
     env_file:
       - .env
@@ -37,6 +48,10 @@ services:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_HTTP_PORT: 8080
+      KC_HTTP_RELATIVE_PATH: {{ .keycloakHttpRelativePath }}
+      KC_LOG_LEVEL: {{ .keycloakLogLevel }}
+      KC_METRICS_ENABLED: "{{ .keycloakMetricsEnabled }}"
+      KC_HEALTH_ENABLED: "{{ .keycloakHealthEnabled }}"
     ports:
       - "{{ .keycloakPort }}:8080"
 {{ if .modules.postgres.enabled }}
@@ -50,6 +65,11 @@ services:
       timeout: 10s
       retries: 10
       start_period: 60s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - kc_net
 
