@@ -1,4 +1,4 @@
-name: traefik
+name: traefik-docker-compose
 owner: kikplate-public
 description: Traefik v3 reverse proxy and load balancer with Docker provider, automatic service discovery, and dashboard.
 version: 1.0.0
