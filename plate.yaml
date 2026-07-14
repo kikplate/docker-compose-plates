@@ -50,8 +50,8 @@ schema:
 
 files:
   - path: docker-compose.yml
-    template: templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/nginx-proxy/templates/docker-compose.yml.tmpl
   - path: nginx.conf
-    template: templates/nginx.conf.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/nginx-proxy/templates/nginx.conf.tmpl
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/nginx-proxy/templates/README.md.tmpl
