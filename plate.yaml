@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Mailpit local SMTP catch-all server with web UI for testing email sending in development environments.
 version: 1.0.0
 category: backend
+verification_token: e576fa0f-840a-447a-947c-51fe636cc5fe
 
 tags:
   - mailpit
