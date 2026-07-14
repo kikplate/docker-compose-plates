@@ -84,10 +84,10 @@ files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
   - path: docker-compose.postgres.yml
-    template: ../postgres/templates/docker-compose.yml.tmpl
+    template: ../../postgres/templates/docker-compose.yml.tmpl
     condition: modules.postgres.enabled
   - path: docker-compose.redis.yml
-    template: ../redis/templates/docker-compose.yml.tmpl
+    template: ../../redis/templates/docker-compose.yml.tmpl
     condition: modules.redis.enabled
   - path: .env
     template: templates/.env.tmpl
