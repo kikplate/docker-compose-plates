@@ -3,6 +3,9 @@ services:
     image: nginx:{{ .nginxVersion }}
     container_name: {{ .projectName }}-nginx
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "{{ .proxyPort }}:80"
     volumes:
@@ -12,6 +15,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - proxy_net
 

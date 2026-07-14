@@ -1,0 +1,12 @@
+projectName: "nginx-proxy"
+nginxVersion: "1.27-alpine"
+proxyPort: 8080
+upstreamHost: "app"
+upstreamPort: 3000
+clientMaxBodySize: "16m"
+workerProcesses: "auto"
+workerConnections: 1024
+keepaliveTimeout: 65
+gzipEnabled: "on"
+proxyReadTimeout: 60
+proxySendTimeout: 60

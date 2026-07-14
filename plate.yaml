@@ -29,6 +29,24 @@ schema:
   clientMaxBodySize:
     type: string
     default: 16m
+  workerProcesses:
+    type: string
+    default: auto
+  workerConnections:
+    type: int
+    default: 1024
+  keepaliveTimeout:
+    type: int
+    default: 65
+  gzipEnabled:
+    type: string
+    default: "on"
+  proxyReadTimeout:
+    type: int
+    default: 60
+  proxySendTimeout:
+    type: int
+    default: 60
 
 files:
   - path: docker-compose.yml
