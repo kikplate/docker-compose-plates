@@ -1,4 +1,4 @@
-name: prometheus-grafana
+name: prometheus-grafana-docker-compose
 owner: kikplate-public
 description: Prometheus metrics collection with optional Grafana dashboards, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
