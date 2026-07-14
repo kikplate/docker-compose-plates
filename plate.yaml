@@ -24,6 +24,21 @@ schema:
   wordpressPort:
     type: int
     default: 8080
+  wordpressDebug:
+    type: string
+    default: "false"
+  wordpressTablePrefix:
+    type: string
+    default: wp_
+  phpMemoryLimit:
+    type: string
+    default: 256M
+  maxUploadSize:
+    type: string
+    default: 64M
+  wordpressAdminEmail:
+    type: string
+    default: admin@example.com
 
 modules:
   mysql:
@@ -37,7 +52,7 @@ composes:
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
-  - path: .env.example
-    template: templates/.env.example.tmpl
+  - path: .env
+    template: templates/.env.tmpl
   - path: README.md
     template: templates/README.md.tmpl

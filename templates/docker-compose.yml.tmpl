@@ -4,6 +4,9 @@ services:
     image: mysql:{{ .mysqlVersion }}
     container_name: {{ .projectName }}-mysql
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
@@ -11,6 +14,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -19,6 +23,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - wp_net
 
@@ -27,6 +36,9 @@ services:
     image: wordpress:{{ .wordpressVersion }}
     container_name: {{ .projectName }}-wordpress
     restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env
     environment:
@@ -34,6 +46,12 @@ services:
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_TABLE_PREFIX: {{ .wordpressTablePrefix }}
+      WORDPRESS_DEBUG: {{ .wordpressDebug }}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_MEMORY_LIMIT', '{{ .phpMemoryLimit }}');
+        @ini_set('upload_max_filesize', '{{ .maxUploadSize }}');
+        @ini_set('post_max_size', '{{ .maxUploadSize }}');
     ports:
       - "{{ .wordpressPort }}:80"
     volumes:
@@ -43,6 +61,11 @@ services:
       mysql:
         condition: service_healthy
 {{ end }}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - wp_net
 

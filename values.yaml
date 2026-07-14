@@ -1,0 +1,13 @@
+projectName: "wordpress"
+wordpressVersion: "6.5-apache"
+mysqlVersion: "8.4"
+wordpressPort: 8080
+wordpressDebug: "false"
+wordpressTablePrefix: "wp_"
+phpMemoryLimit: "256M"
+maxUploadSize: "64M"
+wordpressAdminEmail: "admin@example.com"
+
+modules:
+  mysql:
+    enabled: true
