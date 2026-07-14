@@ -38,11 +38,11 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/docker-compose.yml.tmpl
+    template: templates/docker-compose.yml.tmpl
   - path: prometheus.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/prometheus.yml.tmpl
+    template: templates/prometheus.yml.tmpl
   - path: .env.example
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/.env.example.tmpl
+    template: templates/.env.example.tmpl
     condition: modules.grafana.enabled
   - path: README.md
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/prometheus-grafana/templates/README.md.tmpl
+    template: templates/README.md.tmpl
