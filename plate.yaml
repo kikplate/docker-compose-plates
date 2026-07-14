@@ -2,7 +2,7 @@ name: loki-grafana
 owner: kikplate-public
 description: Grafana Loki log aggregation with optional Promtail agent and optional Grafana dashboards, persistent named volumes, and bridge network isolation.
 version: 1.0.0
-category: observability
+category: devops
 
 tags:
   - loki
