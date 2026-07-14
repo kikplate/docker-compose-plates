@@ -23,6 +23,18 @@ schema:
   postgresVersion:
     type: string
     default: "16"
+  postgresPort:
+    type: int
+    default: 5432
+  timezone:
+    type: string
+    default: UTC
+  sharedBuffers:
+    type: string
+    default: "128MB"
+  maxConnections:
+    type: int
+    default: 100
   keycloakPort:
     type: int
     default: 8080
@@ -43,14 +55,12 @@ modules:
   postgres:
     enabled: true
 
-composes:
-  - name: postgres
-    source: https://github.com/kikplate/docker-compose-plates
-    branch: postgres
-
 files:
   - path: docker-compose.yml
     template: templates/docker-compose.yml.tmpl
+  - path: docker-compose.postgres.yml
+    template: ../postgres/templates/docker-compose.yml.tmpl
+    condition: modules.postgres.enabled
   - path: .env
     template: templates/.env.tmpl
   - path: README.md

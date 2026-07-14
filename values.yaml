@@ -1,6 +1,10 @@
 projectName: "keycloak"
 keycloakVersion: "24.0"
 postgresVersion: "16"
+postgresPort: 5432
+timezone: "UTC"
+sharedBuffers: "128MB"
+maxConnections: 100
 keycloakPort: 8080
 keycloakLogLevel: "INFO"
 keycloakMetricsEnabled: "true"
