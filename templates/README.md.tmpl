@@ -1,0 +1,14 @@
+# {{ .projectName }}
+
+Apache Kafka in KRaft mode with Kafka UI.
+
+## Quick Start
+
+    docker compose up -d
+
+## Access
+
+* Kafka (external): localhost:{{ .kafkaPort }}
+* Kafka UI: http://localhost:{{ .kafkaUiPort }}
+
+Containers on the same Docker network connect using kafka:29092.
