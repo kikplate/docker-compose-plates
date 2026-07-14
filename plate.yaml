@@ -25,6 +25,12 @@ schema:
   portainerEdgePort:
     type: int
     default: 8000
+  portainerHttpsPort:
+    type: int
+    default: 9443
+  portainerLogLevel:
+    type: string
+    default: INFO
 
 files:
   - path: docker-compose.yml

@@ -1,0 +1,6 @@
+projectName: "portainer"
+portainerVersion: "2.20.3"
+portainerPort: 9000
+portainerEdgePort: 8000
+portainerHttpsPort: 9443
+portainerLogLevel: "INFO"

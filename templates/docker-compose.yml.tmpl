@@ -3,10 +3,16 @@ services:
     image: portainer/portainer-ce:{{ .portainerVersion }}
     container_name: {{ .projectName }}-portainer
     restart: unless-stopped
-    command: --base-url /
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - --base-url=/
+      - --log-level={{ .portainerLogLevel }}
     ports:
       - "{{ .portainerEdgePort }}:8000"
       - "{{ .portainerPort }}:9000"
+      - "{{ .portainerHttpsPort }}:9443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - portainer_data:/data
@@ -16,6 +22,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   portainer_data:
