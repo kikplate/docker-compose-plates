@@ -1,0 +1,34 @@
+name: rabbitmq
+owner: kikplate-public
+description: RabbitMQ 3 AMQP message broker with management plugin, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: messaging
+
+tags:
+  - rabbitmq
+  - amqp
+  - messaging
+  - message-broker
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: rabbitmq
+  rabbitmqVersion:
+    type: string
+    default: "3.13"
+  amqpPort:
+    type: int
+    default: 5672
+  managementPort:
+    type: int
+    default: 15672
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/rabbitmq/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/rabbitmq/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/rabbitmq/templates/README.md.tmpl

@@ -1,0 +1,15 @@
+# {{ .projectName }}
+
+RabbitMQ AMQP message broker with management UI.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* AMQP: localhost:{{ .amqpPort }}
+* Management UI: http://localhost:{{ .managementPort }}
+
+Log in to the management UI with the credentials set in your .env file.
