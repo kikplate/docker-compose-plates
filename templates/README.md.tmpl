@@ -1,0 +1,16 @@
+# {{ .projectName }}
+
+PostgreSQL database with pgAdmin web interface.
+
+## Quick Start
+
+    cp .env.example .env
+    docker compose up -d
+
+## Access
+
+* PostgreSQL: localhost:{{ .postgresPort }}
+* pgAdmin: http://localhost:{{ .pgadminPort }}
+
+Log in to pgAdmin with the credentials from your .env file.
+Connect pgAdmin to the database using the hostname postgres.

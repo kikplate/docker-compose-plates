@@ -1,0 +1,47 @@
+name: postgres
+owner: kikplate-public
+description: PostgreSQL 16 database with optional pgAdmin 4 web interface, persistent named volumes, health checks, and bridge network isolation.
+version: 1.0.0
+category: database
+
+tags:
+  - postgres
+  - postgresql
+  - database
+  - pgadmin
+  - docker-compose
+
+schema:
+  projectName:
+    type: string
+    default: postgres
+  postgresVersion:
+    type: string
+    default: "16"
+  postgresUser:
+    type: string
+    default: app
+  postgresDb:
+    type: string
+    default: app
+  postgresPort:
+    type: int
+    default: 5432
+  pgadminEmail:
+    type: string
+    default: admin@example.com
+  pgadminPort:
+    type: int
+    default: 5050
+
+modules:
+  pgadmin:
+    enabled: true
+
+files:
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/docker-compose.yml.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/.env.example.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/README.md.tmpl

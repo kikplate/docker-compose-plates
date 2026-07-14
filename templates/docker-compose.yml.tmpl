@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:{{ .postgresVersion }}-alpine
+    container_name: {{ .projectName }}-postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "{{ .postgresPort }}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - db_net
+{{ if .modules.pgadmin.enabled }}
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: {{ .projectName }}-pgadmin
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - "{{ .pgadminPort }}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - db_net
+{{ end }}
+volumes:
+  postgres_data:
+{{ if .modules.pgadmin.enabled }}
+  pgadmin_data:
+{{ end }}
+networks:
+  db_net:
+    driver: bridge
