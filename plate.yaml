@@ -3,6 +3,7 @@ owner: kikplate-public
 description: n8n workflow automation platform. Composes the postgres plate for persistent workflow storage. The postgres module can be disabled when using an external PostgreSQL instance.
 version: 1.0.0
 category: backend
+verification_token: 30dc69e8-88b3-4888-a7cc-926099f42be1
 
 tags:
   - n8n
