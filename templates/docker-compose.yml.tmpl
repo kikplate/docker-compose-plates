@@ -34,10 +34,10 @@ services:
         max-file: "3"
     networks:
       - db_net
-{{ if .modules.phpmyadmin.enabled }}
+{{ with .modules.phpmyadmin }}{{ if .enabled }}
   phpmyadmin:
-    image: phpmyadmin:{{ .phpmyadminVersion }}
-    container_name: {{ .projectName }}-phpmyadmin
+    image: phpmyadmin:{{ $.phpmyadminVersion }}
+    container_name: {{ $.projectName }}-phpmyadmin
     restart: unless-stopped
     stop_grace_period: 30s
     security_opt:
@@ -48,7 +48,7 @@ services:
       PMA_ARBITRARY: 0
       UPLOAD_LIMIT: 64M
     ports:
-      - "{{ .phpmyadminPort }}:80"
+      - "{{ $.phpmyadminPort }}:80"
     depends_on:
       mysql:
         condition: service_healthy
@@ -59,7 +59,7 @@ services:
         max-file: "3"
     networks:
       - db_net
-{{ end }}
+{{ end }}{{ end }}
 volumes:
   mysql_data:
 
