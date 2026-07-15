@@ -67,6 +67,8 @@ modules:
     enabled: true
   grafana:
     enabled: true
+  pgadmin:
+    enabled: false
   postgres:
     enabled: false
 
