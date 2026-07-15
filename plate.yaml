@@ -3,7 +3,7 @@ owner: kikplate-public
 description: Elasticsearch Logstash and Kibana 8 stack for log aggregation and search, persistent named volumes, health checks, and bridge network isolation.
 version: 1.0.0
 category: devops
-verification_token: 5d376440-aa32-4dcf-b9fd-1e1efa47a7ed
+verification_token: 50abbdfb-c7ab-4883-8e54-b3609aed4990
 
 tags:
   - elasticsearch
