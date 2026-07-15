@@ -51,6 +51,15 @@ schema:
   keycloakHttpRelativePath:
     type: string
     default: "/"
+  pgadminVersion:
+    type: string
+    default: "8"
+  pgadminPort:
+    type: int
+    default: 5050
+  pgadminEmail:
+    type: string
+    default: admin@example.com
 
 modules:
   postgres:
