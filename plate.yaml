@@ -64,6 +64,8 @@ schema:
 modules:
   postgres:
     enabled: true
+  pgadmin:
+    enabled: false
 
 files:
   - path: docker-compose.yml
