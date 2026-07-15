@@ -33,16 +33,16 @@ services:
         max-file: "3"
     networks:
       - cache_net
-{{ if .modules.redisInsight.enabled }}
+{{ with .modules.redisInsight }}{{ if .enabled }}
   redisinsight:
-    image: redis/redisinsight:{{ .redisInsightVersion }}
-    container_name: {{ .projectName }}-redisinsight
+    image: redis/redisinsight:{{ $.redisInsightVersion }}
+    container_name: {{ $.projectName }}-redisinsight
     restart: unless-stopped
     stop_grace_period: 30s
     security_opt:
       - no-new-privileges:true
     ports:
-      - "{{ .redisInsightPort }}:5540"
+      - "{{ $.redisInsightPort }}:5540"
     volumes:
       - redisinsight_data:/data
     depends_on:
@@ -55,12 +55,12 @@ services:
         max-file: "3"
     networks:
       - cache_net
-{{ end }}
+{{ end }}{{ end }}
 volumes:
   redis_data:
-{{ if .modules.redisInsight.enabled }}
+{{ with .modules.redisInsight }}{{ if .enabled }}
   redisinsight_data:
-{{ end }}
+{{ end }}{{ end }}
 networks:
   cache_net:
     driver: bridge
