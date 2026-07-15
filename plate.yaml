@@ -69,8 +69,12 @@ schema:
     default: "3600 1 300 100 60 10000"
 
 modules:
+  phpmyadmin:
+    enabled: false
   mysql:
     enabled: true
+  redisInsight:
+    enabled: false
   redis:
     enabled: false
 
