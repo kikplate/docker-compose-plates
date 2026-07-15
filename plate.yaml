@@ -3,6 +3,7 @@ owner: kikplate-public
 description: Grafana Loki log aggregation with optional Promtail agent and optional Grafana dashboards, persistent named volumes, and bridge network isolation.
 version: 1.0.0
 category: devops
+verification_token: 10fad74d-4fb6-4a86-86f1-35d544844b73
 
 tags:
   - loki
