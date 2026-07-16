@@ -69,7 +69,7 @@ modules:
 
 files:
   - path: docker-compose.yml
-    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak3433/templates/docker-compose.yml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/keycloak/templates/docker-compose.yml.tmpl
   - path: docker-compose.postgres.yml
     template: https://raw.githubusercontent.com/kikplate/docker-compose-plates/postgres/templates/docker-compose.yml.tmpl
     condition: modules.postgres.enabled
